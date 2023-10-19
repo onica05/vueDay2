@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-自定义指令</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联--> 
+    <!-- 语法规则:  (例如:获取元素焦点)
+        focus 是自定义的指令名称
+        Vue.directive('focus', {
+            inserted也可以写成bind,通用,钩子函数有关
+            inserted:function(el,){
+                // 获取元素的焦点 
+                el.focus()
+            }
+        })
+     -->
+     <!-- 用法:<input type='text' v-focus -->
+
+
+   <div id="app">
+    <!-- 需求:表单自动获取焦点,不用鼠标点击 -->
+    <input type="text" v-focus>
+   </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+
+        Vue.directive('focus',{
+            inserted:function(el){
+                // el表示指令所绑定的元素
+                // 获取元素的焦点 
+                el.focus()
+            }
+        })
+        
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+               
+            },
+            methods:{
+               handle:function(){
+                
+               }
+
+            }
+        });
+    </script>
+
+</body>
+</html>

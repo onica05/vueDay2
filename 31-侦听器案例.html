@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-侦听器案例-验证用户名是否可用</title>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 3.计算属性(跟methods相似) -->
+    <!-- 4.侦听器 -->
+    <!-- 功能:验证用户名,验证用户名已经被使用,就提示信息更换用户名,没有被使用,就用户名可用 -->
+    <!-- 需求:输入框中输入姓名,失去焦点时,验证用户名是否可用,如可用,就提醒可用,不可用,就提示,用户名已存在重新输入 -->
+    <!-- ①通过v-model实现数据绑定
+        ②需要提供提示信息
+        ③需要侦听器监听输入信息的变化(后台AJAX)
+        ④需要修改触发的条件(修饰符 .lazy)
+     -->
+    
+
+
+
+    <div id="app">
+        <div>
+            <span>用户名:</span>
+            <span>
+                <input type="text" v-model.lazy="uname">
+            </span>
+            <span>{{tip}}</span>
+        </div>
+        <div>
+            
+        </div>
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+               uname:'',
+               tip:''
+            },
+            methods: {
+                checkName:function(uname){
+                    // 调用接口,但是可以使用定时任务的方式,模拟接口调用
+                    // 由于setTimeout 的 this 指向window,所以在外面指向一次
+                    var that = this;
+                    setTimeout(function(){
+                        // 模拟接口调用
+                        if(uname == 'admin'){
+                            // 3.根据验证结果调整提示信息
+                            that.tip = '用户名已经存在,请更换一个'
+                        }else{
+                            that.tip = '用户名可以使用'
+                        }
+                    },2000);
+                }
+            },
+            // 侦听器实现步骤      
+            watch: {
+                // 1.采用侦听器监听用户名的变化 
+               uname:function(val){
+                // val表示用户输入的用户名
+                // 2.调用后台接口进行验证   这一步单独封装在methods里面 代码更加简洁
+                // 调用checkName方法验证
+                this.checkName(val);
+                // 在验证过程中,也需要有提示内容,表示正在验证
+                this.tip = '正在验证...';
+               }
+            },
+            
+        });
+    </script>
+</body>
+
+</html>

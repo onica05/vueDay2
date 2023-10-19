@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--分支循环结构</title>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定 -->
+    <!-- 4.属性绑定 -->
+    <!-- 5.样式绑定 -->
+    <!-- 6.分支循环结构 -->
+    <!-- 二、循环 -->
+    <!-- 2.v-for 遍历对象 -->
+    <!-- value:属性值；key：属性；index：索引号 -->
+    <!-- 语法结构：<div v-for='(value, key, index) in object'></div>-->
+    <!-- v-if v-for的结合使用 -->
+    <!-- 语法结构：<div v-if='value==12' v-for='(value, key, index) in object'></div>-->
+
+
+    <div id="app">
+        <div v-for="(value, key, index) in obj">{{value+"----"+key+"----"+index}}</div>
+        <div v-if='value==12'   v-for='(value, key, index) in obj1'></div>
+        <!-- 这个没有渲染出来，因为value不等于12 -->
+    </div>
+
+     <!-- 引入vue.js库文件 -->
+     <script type="text/javascript" src="../JS/vue.min.js"></script>
+     <script type="text/javascript">
+        // 使用原生js遍历对象
+        var obj = {
+            uname:'list',
+            age:12,
+            gender:'female'
+        }
+        for(var key in obj){
+            // 这里面的key表示，属性； obj[key]表示属性值
+            console.log(key, obj[key]);
+        }
+
+
+         var vm = new Vue({
+             el: '#app', 
+             data: {
+                obj:{
+                    uname: 'list',
+                    age: 12,
+                    gender: 'female'
+                },
+                obj1:{
+                    uname:'min',
+                    age:14,
+                    gender:'male'
+                }
+             },
+             methods: {
+                 handle: function(event){
+                     
+                 }
+             }
+         });
+     </script>
+</body>
+</html>

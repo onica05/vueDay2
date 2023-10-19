@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-生命周期</title>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 3.计算属性(跟methods相似) -->
+    <!-- 4.侦听器 -->
+    <!-- 5.过滤器 -->
+    <!-- 6.生命周期(vue实例对象的周期) -->
+    <!-- 生命周期主要阶段：
+        挂载（初始化相关属性）
+        ①beforeCreate 在实例初始化之后,数据观测和事件配置之前被调用
+        ②created  在实例创建完成后被立即调用
+        ③beforeMount  在挂载开始之前被调用
+        ④mounted el被新创建的vm.$el替换,并挂载到实例上去之后被调用该钩子  这个重要!!
+        更新（元素或组件的变更操作）
+        ①beforeUpdate  数据更新时调用,发生在虚拟DOM打补丁之前
+        ②updated 由于数据更改导致的虚拟DOM重新渲染和打补丁,在这之后调用该钩子
+        销毁(销毁相关属性)
+        ①beforeDestroy实例销毁之前调用
+        ②destroy 实例销毁后调用
+     -->
+
+    <div id="app">
+        <div>{{msg}}</div>
+        <button @click="updated">更新</button>
+        <button @click="destroy">销毁</button>
+
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '生命周期'
+            },
+            methods:{
+                updated:function(){
+                    this.msg='hello';
+                },
+                destroy:function(){
+                    this.$destroy()
+                }
+            },
+            // 挂载阶段
+            beforeCreate: function () {
+                console.log('beforeCreate');
+            },
+            created: function () {
+                console.log('created');
+            },
+            beforeMount: function () {
+                console.log('beforeMount');
+            },
+            mounted: function () {
+                console.log('mounted');
+
+            },
+            // 更新阶段 点击更新之后 这个会被触发
+            beforeUpdate: function () {
+                console.log('beforeUpdate');
+
+            },
+            updated: function () {
+                console.log('updated');
+
+            },
+            // 销毁阶段
+            beforeDestroy: function () {
+                console.log('beforeDestroy');
+
+            },
+            destroyed: function () {
+
+                console.log('destroyed');
+            },
+
+        });
+    </script>
+</body>
+
+</html>

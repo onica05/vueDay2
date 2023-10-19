@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-表单操作</title>
+    <style>
+        div{
+            margin-bottom: 10px;
+        }
+        div:nth-child(4){
+            height: auto;
+        }
+        span{
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+   <!-- 实际作用:用户交互,通过表单进行数据的交互;例如:发邮件,input单行文本,textarea多行文本,select下拉多选,radio单选框,checkbox多选框 -->
+   <div id="app">
+    <form action="###">
+        <!-- 第一排姓名 -->
+        <div>
+            <span>姓名:</span>
+            <span>
+                <input type="text" v-model="uname">
+            </span>
+        </div>
+        <!-- 第二排性别 -->
+        <div>
+            <span>性别:</span>
+            <span>
+                <input type="radio" id="male" value="1" v-model="gender">
+                <label for="male">男</label>
+                <input type="radio" id="female" value="2" v-model="gender">
+                <label for="female">女</label>
+            </span>
+        </div>
+        <!-- 第三排爱好 -->
+        <div>
+            <span>爱好:</span>
+            <span>
+                <input type="checkbox" id="basketball" value="1" v-model="hobby">
+                <label for="male">篮球</label>
+                <input type="checkbox" id="sing" value="2" v-model="hobby">
+                <label for="female">唱歌</label>
+                <input type="checkbox" id="coding" value="3" v-model="hobby">
+                <label for="female">写代码</label>
+            </span>
+        </div>
+        <!-- 第四排职业 -->
+        <div>
+            <span>职业:</span>
+            <span>
+                <!-- multiple="true" 多选用的 -->
+                <select v-model="occupation" >
+                    <option value="0">请选择职业...</option>
+                    <option value="1">教师</option>
+                    <option value="2">工程师</option>
+                    <option value="3"> 设计师</option>
+                </select>
+            </span>
+        </div>
+        <!-- 第五排个人简介 -->
+        <div>
+            <span>个人简介:</span>
+            <span>
+                <textarea v-model="desc"></textarea>
+            </span>
+        </div>
+        <!-- 第六排提交按钮 -->
+        <div>
+            <input type="submit" value="提交" @click.prevent="handle">
+        </div>
+    </form>
+   </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                uname:'min' ,
+                // 默认选中男
+                gender:1,
+                hobby:['2'],
+                //下面这个单选就用单个数值,多选就用数组
+                occupation:0,
+                desc:'hi'
+            },
+            methods:{
+                handle: function(){
+                    console.log(this.uname);
+                    console.log(this.gender);
+                    console.log(this.hobby.toString());
+                    console.log(this.occupation);
+                    console.log(this.desc);
+                }
+
+            }
+        });
+    </script>
+
+</body>
+</html>

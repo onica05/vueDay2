@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-表单域修饰符</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 表单域修饰符 -->
+    <!-- 1.number:转化为数值; 2.trim:去掉开始和结尾的空格; 
+        3.lazy:将input事件切换为change事件,
+        这里的change 表示延迟一点触发,由于input特点,表单一输入内容下面就会接着显示,
+        那么change事件就是在完全输入完毕之后(表单失去焦点之后)在显示在页面上 .
+        使用场景在输入用户名的时候,验证这个用户名是否正确,重名的情况.
+    -->
+   <div id="app">
+    <input v-model.number="age" type="text">
+    <input v-model.trim="info" type="text">
+    <input v-model.lazy="msg" type="text">
+    <div>{{msg}}</div>
+    <button @click="handle">点击</button>
+   </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app', 
+            data: {
+                age:'',
+                info:'',
+                msg:''
+            },
+            methods:{
+               handle:function(){
+                console.log(this.age + 13);
+                console.log(this.info.length);
+               }
+
+            }
+        });
+    </script>
+
+</body>
+</html>

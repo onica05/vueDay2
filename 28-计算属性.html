@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-计算属性</title>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 3.计算属性(跟methods相似) -->
+    <!-- 用法:
+        computed:{
+            reversedMessega:function(){
+                return this.msg.split('').reverse().join('')
+            }
+        }
+        <div>{{reversedMessega}}</div>
+     -->
+
+    <div id="app">
+        <div>{{msg}}</div>
+        <!-- split('').reverse().join('') 这一堆就是原生js,反转顺序的办法 -->
+        <div>{{msg.split('').reverse().join('')}}</div>
+        <!-- 使用就直接写函数名,不用加括号 -->
+        <div>{{reversedMessega}}</div>
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello'
+            },
+            methods: {
+                handle: function () {
+
+                }
+            },
+            computed: {
+                reversedMessega: function () {
+                    // 记住return!!
+                    return this.msg.split('').reverse().join('')
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-带参数的过滤器案例</title>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 3.计算属性(跟methods相似) -->
+    <!-- 4.侦听器 -->
+    <!-- 5.过滤器 -->
+    <!-- 作用:格式化数据,比如将字符串格式化为首字母大写,将日期格式化为指定的格式等 -->
+    <!-- 用法:
+        自定义过滤器:
+        Vue.filter('过滤器名称', function(value){
+            过滤器逻辑
+        })
+        使用:三种方式
+        ①<div>{{msg | upper}} </div>
+        ②<div>{{msg | upper | lower}}</div> 多个过滤器，依次过滤,输出的结果会经过多次的过滤
+        ③<div v-bind:id="id | formatId"></div>
+     -->
+    <!-- 局部过滤器 
+        filters:{
+            capitalize:function(){}
+        }
+    -->
+    <!-- 带参数的过滤器：
+        Vue.filter('format', function(value,arg1){
+            value就是过滤器传递过来的参数，默认要处理的data数据  ;arg1参数1
+            // 过滤器逻辑
+        })
+        使用：<div>{{date | format('yyyy-mm-dd')}}</div>
+     -->
+
+
+
+    <!-- 案例：使用过滤器格式化日期  yyyy-mm-dd格式-->
+
+
+
+
+    <div id="app">
+        <div>{{date |format('yyyy-mm-dd') }}</div>
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.filter('format', function (value, arg) {
+            console.log(value);
+            console.log(arg);
+            if (arg == 'yyyy-mm-dd') {
+                var ret = '';
+                ret += value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + value.getDate();
+                return ret;
+
+            }
+            return value;
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                date: new Date()
+            },
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>

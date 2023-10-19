@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-侦听器</title>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 3.计算属性(跟methods相似) -->
+    <!-- 4.侦听器 -->
+    <!-- 概念:用于监听数据,数据一档发生变化就通知侦听器所绑定方法 -->
+    <!-- 应用场景:处理数据变化时执行异步 或 开销较大的操作(比较耗时的操作) -->
+    <!-- 用法:
+        watch:{
+            firstName:function(val){
+                    val表示变化之后的值
+                this.fullName = val + this.lastName;
+            },
+            lastName:function(val){
+                this.fullName = this.firstName + val
+            }
+        }
+     -->
+
+
+
+    <div id="app">
+        <div>
+            <span>名:</span>
+            <span>
+                <input type="text" v-model="firstName">
+            </span>
+        </div>
+        <div>
+            <span>姓氏:</span>
+            <span>
+                <input type="text" v-model="lastName">
+            </span>
+        </div>
+        <div>{{fullName}}</div>
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+        // 需求:在表单里面修改姓 名,对应下面的fullname也要变化
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                firstName: 'jim',
+                lastName: 'Green',
+                // fullName: 'jim Green'
+            },
+            methods: {
+
+            },
+            // watch: {
+            //     firstName: function (val) {
+            //         // val表示变化之后的值
+            //         // 拼接全名
+            //         this.fullName = val + '' + this.lastName;
+            //     },
+            //     lastName: function (val) {
+            //         this.fullName = this.firstName + '' + val
+            //     }
+            // },
+            // computed也可以实现上面的需求
+            computed:{
+                fullName: function(){
+                    return this.firstName +'   '+ this.lastName
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

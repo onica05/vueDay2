@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-自定义指令-局部指令</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 局部指令  directives, 跟组件有关系 -->
+
+
+    <div id="app">
+        <!-- 需求:表单自动获取焦点,不用鼠标点击 -->
+        <input type="text" v-color="msg" >
+        <input type="text" v-focus>
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: {
+                    color: 'pink'
+                }
+
+            },
+            methods: {
+                handle: function () {
+
+                }
+
+            },
+            directives: {
+                color: {
+                    bind: function (el, binding) {
+                        // el表示指令所绑定的元素
+                        el.style.backgroundColor = binding.value.color
+                    }
+
+                },
+                focus: {
+                    inserted: function (el) {
+                        // el表示指令所绑定的元素
+                        // 获取元素的焦点 
+                        el.focus()
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

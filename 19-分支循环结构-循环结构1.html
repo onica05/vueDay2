@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法--分支循环结构</title>
+</head>
+<body>
+    <!-- 将数据填充到html标签中 -->
+    <!-- 概览 -->
+    <!-- 1.插值表达式  -->
+    <!-- 2.指令 -->
+    <!-- 3.事件绑定 -->
+    <!-- 4.属性绑定 -->
+    <!-- 5.样式绑定 -->
+    <!-- 6.分支循环结构 -->
+    <!-- 二、循环 -->
+    <!-- 1.v-for 遍历数组 -->
+    <!-- 语法结构：
+        <li v-for='item in list'         >{{item}}                      </li> 
+        <li v-for='(item, index) in list'> {{item}} + '----' +{{index}} </li>
+        跟上面比较多了key， key的作用：帮助显示vue区分不同的元素，从而提高性能 。:key是v-bind:key的简写
+        <li :key='item.id' v-for='(item,index) in list'>{{item}}+ '----' +{{index}} </li>
+        item.id是为了表示唯一性，要是没有id可以用index 代替
+    -->
+    <!-- 2. -->
+
+    <div id="app">
+        <div>水果列表</div>
+        <ul>
+            <li v-for="item in fruits">{{item}}</li>
+            <li v-for="(item, index) in fruits"> {{item}} + '----' + {{index}} </li>
+            <li v-for="item in MyFruits">
+                <span>{{item.ename}}</span>
+                <span>{{item.cname}}</span>
+
+            </li>
+        <li :key='item.id' v-for='(item,index) in MyFruits'>{{item.ename}}{{item.cname}}+ '----' +{{index}} </li>
+
+
+        </ul>
+    </div>
+
+     <!-- 引入vue.js库文件 -->
+     <script type="text/javascript" src="../JS/vue.min.js"></script>
+     <script type="text/javascript">
+         var vm = new Vue({
+             el: '#app', 
+             data: {
+                fruits:['apple', 'orange', 'banana'],
+                MyFruits:[{
+                    id: 1,
+                    ename:'apple',
+                    cname:'苹果'
+                },
+                {
+                    id: 2,
+                    ename:'orange',
+                    cname:'橘子'
+                },{
+                    id: 3,
+                    ename:'banana',
+                    cname:'香蕉'
+                },]
+
+             },
+             methods: {
+                 handle: function(event){
+                     
+                 }
+             }
+         });
+     </script>
+</body>
+</html>

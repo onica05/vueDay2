@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用特性-计算属性与方法的区别</title>
+</head>
+
+<body>
+    <!-- 常用特性：也就是高级vue操作 -->
+    <!-- 1.表单操作(v-model以及其他) -->
+    <!-- 2.自定义指令(之前的vue默认提供的)  跟之后的钩子函数有关联-->
+    <!-- 3.计算属性(跟methods相似) -->
+    <!-- 计算属性与方法(methos)的区别 :
+        1.计算属性基于 依赖 缓存
+        2.方法不存在 缓存
+    -->
+    
+    
+
+    <div id="app">
+        <div>{{msg}}</div>
+        <!-- split('').reverse().join('') 这一堆就是原生js,反转顺序的办法 -->
+        <div>{{msg.split('').reverse().join('')}}</div>
+        <!-- 使用就直接写函数名,不用加括号 -->
+        <div>{{reversedMessega}}</div>
+        <div>{{reversedMessega}}</div>
+        <div>-------------</div>
+        <div>{{reverseString()}}</div>
+        <div>{{reverseString()}}</div>
+        <div>-------------</div>
+        <div>{{count}}</div>
+
+    </div>
+
+
+    <!-- 引入vue.js库文件 -->
+    <script type="text/javascript" src="../JS/vue.min.js"></script>
+    <script type="text/javascript">
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                num: 100,
+            },
+            methods:{
+                reverseString:function(){
+                    // 输出打印两次methods
+                    console.log('methods');
+                    // 记住return!!
+                    return this.msg.split('').reverse().join('')
+                }
+            },
+            computed: {
+                reversedMessega: function () {
+                    // 这里只打印了一次computed, 因为缓存,在第一次访问这个函数的时候,计算逻辑已经执行过了,计算属性已经缓存起来了,当你再次访问的时候,会直接去缓存里面.作用:节省性能
+                    console.log('computed');
+                    // 记住return!!
+                    return this.msg.split('').reverse().join('')
+                },
+                count: function(){
+                    var total =0;
+                    for(var i=0; i<=this.num; i++){
+                        total += i;
+                    }
+                    return total;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
